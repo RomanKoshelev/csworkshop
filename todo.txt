@@ -1,0 +1,19 @@
+- test random add
+- test performance no collision
+- test performance all  collisions
+- add remove mehod and test it
+- test random remove
+- find error -- tip: not all cashes have equal rights
+
+/*
+Тест, который покажет ту ошибку, которая возможно есть такой:
+Добавить в массив 1000 элементов. На следующем 1001 должен быть "отказ" или fault
+
+
+[2:57] 
+А 1000 элементов должны добавиться без ошибок и отказов
+
+
+[2:57] 
+И сразу просьба, N сделать параметром app
+*/
