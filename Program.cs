@@ -1,7 +1,6 @@
 ﻿using System;
-using CSWorkshop;
 
-namespace csworkshop
+namespace CSWorkshop
 {
     class Program
     {
