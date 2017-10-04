@@ -153,6 +153,7 @@ namespace CSWorkshop
     {
         static public void Run()
         {
+            Console.WriteLine("\nRunning tests...\n");
             const int N = 1000;
             var arr = new AssociativeArray(N);
 
@@ -177,10 +178,9 @@ namespace CSWorkshop
             }
 
             Debug.Assert(arr.Get(11111)==null);
-            
+
 
             Console.WriteLine("\nOK");
-            Console.WriteLine("\n!!!");
         }
     }
 }
