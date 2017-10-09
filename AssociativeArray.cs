@@ -8,6 +8,12 @@ using System.Collections.Generic;
 
 namespace CSWorkshop
 {
+    class AssociativeArrayException : Exception
+    {
+        public AssociativeArrayException(string message) : base(message)
+        {
+        }
+    }
     class AssociativeArray
     {
         // ===============================================
@@ -34,23 +40,6 @@ namespace CSWorkshop
         // Public
         // ===============================================
 
-        public void Print()
-        {
-            Console.WriteLine();
-            for(var i=0; i<Size; ++i) {
-                Console.WriteLine(String.Format("[{1,3}]  [{0,3}: {2,3}{6}{3,3} {4,3} {5,3}] {7}", 
-                    i,
-                    Indecies[i],
-                    Records[i].Key,
-                    Records[i].Val,
-                    Records[i].Prev,
-                    Records[i].Next,
-                    Records[i].Key>=0? " ->": "   ",
-                    FreeIdx == i? '*': ' '
-                ));
-            }
-            Console.WriteLine();
-        }
         public AssociativeArray(int size)
         {
             Debug.Assert(size>0);
@@ -78,7 +67,6 @@ namespace CSWorkshop
             if (idx>=0){
                 if(Records[idx].Key == key){
                     // Update first or single key
-                    // Console.Write("!");
                     Records[idx].Val = val;
                     return;
                 }
@@ -86,14 +74,14 @@ namespace CSWorkshop
                     idx=Records[idx].Next;
                     if(Records[idx].Key==key){
                         // Update collided key
-                        // Console.Write("#");
                         Records[idx].Val = val;
                         return;
                     }
                 }
                 // Add collided key
-                // Console.Write("+");
-                Debug.Assert(FreeIdx>=0);
+                if(FreeIdx<0){
+                    throw new AssociativeArrayException("Not enough room");
+                }
 
                 var nextFreeIdx = Records[FreeIdx].Next;
                 Records[idx].Next = FreeIdx;
@@ -109,8 +97,9 @@ namespace CSWorkshop
                 return;
             }
             // Add new key
-            // Console.Write(".");
-            Debug.Assert(FreeIdx>=0);
+            if(FreeIdx<0){
+                throw new AssociativeArrayException("Not enough room");
+            }
             idx = FreeIdx;
             FreeIdx = Records[FreeIdx].Next;
             if(FreeIdx>=0){
