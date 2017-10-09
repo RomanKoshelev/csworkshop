@@ -2,20 +2,18 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
+// ======================================================================================
+// Associative arrary
+// ======================================================================================
+
 namespace CSWorkshop
 {
-
-    // ==================================================================================
-    // Associative arrary
-    // ==================================================================================
-
     class AssociativeArray
     {
         // ===============================================
         // Private
         // ===============================================
 
-        // TODO: Use int **
         private int[] Indecies;
         private Record[] Records;
         private int Size;
@@ -80,7 +78,7 @@ namespace CSWorkshop
             if (idx>=0){
                 if(Records[idx].Key == key){
                     // Update first or single key
-                    Console.Write("!");
+                    // Console.Write("!");
                     Records[idx].Val = val;
                     return;
                 }
@@ -88,13 +86,13 @@ namespace CSWorkshop
                     idx=Records[idx].Next;
                     if(Records[idx].Key==key){
                         // Update collided key
-                        Console.Write("#");
+                        // Console.Write("#");
                         Records[idx].Val = val;
                         return;
                     }
                 }
                 // Add collided key
-                Console.Write("+");
+                // Console.Write("+");
                 Debug.Assert(FreeIdx>=0);
 
                 var nextFreeIdx = Records[FreeIdx].Next;
@@ -111,7 +109,7 @@ namespace CSWorkshop
                 return;
             }
             // Add new key
-            Console.Write(".");
+            // Console.Write(".");
             Debug.Assert(FreeIdx>=0);
             idx = FreeIdx;
             FreeIdx = Records[FreeIdx].Next;
@@ -141,46 +139,6 @@ namespace CSWorkshop
                 }
             }
             return null;
-        }
-    }
-
-
-    // ==================================================================================
-    // Program
-    // ==================================================================================
-
-    class Test
-    {
-        static public void Run()
-        {
-            const int N = 1000;
-            var arr = new AssociativeArray(N);
-
-            // arr.Print();
-            for(var s=0; s<3; ++s){
-                for(var i=0; i<N; ++i)
-                {
-                    var key = i+i*i;
-                    var val = i;
-                    arr.Set(key, val);
-                    Debug.Assert(arr.Get(key)==val);
-                }
-                Console.WriteLine();
-            }
-            // arr.Print();
-
-            for(var i=0; i<N; ++i)
-            {
-                var key = i+i*i;
-                var val = i;
-                Debug.Assert(arr.Get(key)==val);
-            }
-
-            Debug.Assert(arr.Get(11111)==null);
-            
-
-            Console.WriteLine("\nOK");
-            Console.WriteLine("\n!!!");
         }
     }
 }
